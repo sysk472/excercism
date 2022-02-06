@@ -1,9 +1,9 @@
 class AssemblyLine
   NUMBER_OF_CARS_PER_HOUR = 221
-  
+
   def initialize(speed)
     raise ArgumentError, 'speed must be between 1 and 10' unless speed.between?(1, 10)
-    
+
     @speed = speed
   end
 
@@ -14,7 +14,7 @@ class AssemblyLine
   def working_items_per_minute
     (production_rate_per_hour / 60).to_i
   end
-  
+
   def success_rate
     case @speed
     when 1..4
@@ -27,5 +27,4 @@ class AssemblyLine
       0.77
     end
   end
-
 end
