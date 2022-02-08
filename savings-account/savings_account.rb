@@ -1,26 +1,17 @@
 module SavingsAccount
   PERCENT = 100
   def self.interest_rate(balance)
-    case 
-    when balance.negative?
-      -3.213
-    when balance >= 0 && balance < 1000
-      0.5
-    when balance >= 1000 && balance < 5000
-      1.621
-    when balance >= 5000
-      2.475
-    end
+    return -3.213 if balance.negative?
+    return 0.5 if (0...1000).include?(balance)
+    return 1.621 if (1000...5000).include?(balance)
+
+    2.475
   end
 
   def self.annual_balance_update(balance)
     interest_rate = percent_interest_rate(balance)
-
-    if balance.positive?
-      interest_rate * balance + balance
-    else
-      balance - (interest_rate * balance)
-    end
+    interest = balance.abs * interest_rate
+    balance + interest
   end
 
   def self.years_before_desired_balance(current_balance, desired_balance)
