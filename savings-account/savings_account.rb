@@ -15,16 +15,21 @@ module SavingsAccount
   end
 
   def self.years_before_desired_balance(current_balance, desired_balance)
-    profit_per_year = annual_balance_update(current_balance)
-    years = 1
-    while profit_per_year < desired_balance
-      profit_per_year = annual_balance_update(profit_per_year)
-      years += 1
-    end
-    years
+    new_balance_after_years(current_balance)
+      .take_while { |new_balance| new_balance < desired_balance }
+      .count + 1
   end
 
   def self.percent_interest_rate(balance)
     interest_rate(balance) / PERCENT
+  end
+
+  def self.new_balance_after_years(balance)
+    Enumerator.new do |y|
+      loop do
+        balance = annual_balance_update(balance)
+        y << balance
+      end
+    end
   end
 end
