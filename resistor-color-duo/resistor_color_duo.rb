@@ -1,21 +1,28 @@
 class ResistorColorDuo
-  
-  COLORS = {
-    black: 0,
-    brown: 1,
-    red: 2,
-    orange: 3,
-    yellow: 4,
-    green: 5,
-    blue: 6,
-    violet: 7,
-    grey: 8,
-    white: 9
+  BAND = {
+    black:    0,
+    brown:    1,
+    red:      2,
+    orange:   3,
+    yellow:   4,
+    green:    5,
+    blue:     6,
+    violet:   7,
+    grey:     8,
+    white:    9
   }
 
   def self.value(colors)
-    raise ArgumentError, 'There are no colors' if colors.empty?
+    new(colors).to_i
+  end
 
-    "#{COLORS[colors[0].to_sym]}#{COLORS[colors[1].to_sym]}".to_i
+  def initialize(colors)
+    @colors = colors[0..1]
+  end
+
+  def to_i
+    @colors.map do |color|
+      BAND[color.to_sym]
+    end.join.to_i
   end
 end
