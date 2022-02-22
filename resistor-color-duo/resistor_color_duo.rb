@@ -17,12 +17,10 @@ class ResistorColorDuo
   end
 
   def initialize(colors)
-    @colors = colors[0..1]
+    @colors = colors.take(2).sum('') { |e| BAND[e.to_sym].to_s }
   end
 
   def to_i
-    @colors.map do |color|
-      BAND[color.to_sym]
-    end.join.to_i
+    @colors.to_i
   end
 end
