@@ -13,7 +13,7 @@ class HighScores
   end
 
   def personal_top_three
-    scores.max(3) { |a, b| a <=> b }
+    scores.max(3)
   end
 
   def latest_is_personal_best?
