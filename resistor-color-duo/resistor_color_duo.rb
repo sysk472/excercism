@@ -12,7 +12,7 @@ class ResistorColorDuo
     white:    9
   }
 
-  NUMBER_OF_COLORS = 2
+  DUO = 2
 
   attr_reader :colors
 
@@ -21,7 +21,7 @@ class ResistorColorDuo
   end
 
   def initialize(colors)
-    @colors = colors.take(NUMBER_OF_COLORS).sum('') do |color|
+    @colors = colors.take(DUO).sum('') do |color|
       BAND[color.to_sym].to_s
     end
   end
